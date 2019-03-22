@@ -43,82 +43,40 @@ def generate_table(dataframe, max_rows=10):
         ]) for i in range(min(len(dataframe), max_rows))]
     )
 
-
-# BUilding the App 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 
 
-app.layout = html.Div(
-    [
-        # header
-        html.Div([
+@server.route("/dash/<page>")
+def pages_route(page):
 
-            html.Span("IAG FIRST DRAFT", className='app-title'),
-            
-            html.Div(
-                html.Img(src='https://s3-us-west-1.amazonaws.com/plotly-tutorials/logo/new-branding/dash-logo-by-plotly-stripe-inverted.png',height="100%")
-                ,style={"float":"right","height":"100%"})
-            ],
-            className="row header"
-            ),
+    df = pd.read_sql_query('select * from "Test1" limit 10 offset {};'.format(page * 10), conn)
 
-        # tabs
-        html.Div([
+    app.layout = html.Div(children=[
+        html.H1('Iberia', style={'textAlign': 'center', 'color': '#7FDBFF'}),    
+        html.H4(children='Test first table'), generate_table(df),
+        html.Div(children='''
+            Dash: A web application framework for Python.
+        '''),
 
-            dcc.Tabs(
-                id="tabs",
-                style={"height":"20","verticalAlign":"middle"},
-                children=[
-                    dcc.Tab(label="Opportunities", value="opportunities_tab"),
-                    dcc.Tab(label="Manager's view", value="leads_tab"),
-                    dcc.Tab(id="cases_tab",label="IT's views", value="cases_tab"),
+        dcc.Graph(
+            id='example-graph',
+            figure={
+                'data': [
+                    {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
+                    {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
                 ],
-                value="leads_tab",
-            )
+                'layout': {
+                    'title': 'Dash Data Visualization'
+                }
+            }
+        ),
 
-            ],
-            className="row tabs_div"
-            ),
-       
-                
-        # divs that save dataframe for each tab
-        html.Div(id="opportunities_df", style={"display": "none"}), # CEO tab df
-        html.Div(id="leads_df", style={"display": "none"}), # Manager tab df
-        html.Div(id="cases_df", style={"display": "none"}), # IT tabs df
-
-
-
-        # Tab content
-        html.Div(
-            children=[
-            html.Iframe(
-            src = "//plot.ly/~arthur_mf/75.embed",
-            style={"width":"500","height":"500","frameborder":"0"}),
-            html.Iframe(
-            src= "//plot.ly/~arthur_mf/77.embed",
-            style={"width":"500", "height":"500","frameborder":"0", "scrolling":"no"}),
-            html.Div(generate_table(df), 
-            style={"margin-top": "5px","max-height": "350px","overflow-y": "scroll","padding": "8px","background-color": "white","border": "1px solid rgb(200, 212, 227)","border-radius": "3px",},
-            ), 
-        ],     
-        id="tab_content", className="row", style={"margin": "2% 3%","margin-left":"0.5%"}),
-        
-        html.Link(href="https://use.fontawesome.com/releases/v5.2.0/css/all.css",rel="stylesheet"),
-        html.Link(href="https://cdn.rawgit.com/plotly/dash-app-stylesheets/2d266c578d2a6e8850ebce48fdb52759b2aef506/stylesheet-oil-and-gas.css",rel="stylesheet"),
-        html.Link(href="https://fonts.googleapis.com/css?family=Dosis", rel="stylesheet"),
-        html.Link(href="https://fonts.googleapis.com/css?family=Open+Sans", rel="stylesheet"),
-        html.Link(href="https://fonts.googleapis.com/css?family=Ubuntu", rel="stylesheet"),
-        html.Link(href="https://cdn.rawgit.com/amadoukane96/8a8cfdac5d2cecad866952c52a70a50e/raw/cd5a9bf0b30856f4fc7e3812162c74bfc0ebe011/dash_crm.css", rel="stylesheet")
-    ],
-    className="row",
-    style={"margin": "0%"},
-)
-
+        html.A
+    ])
 
 if __name__ == '__main__':
-
     app.run_server(debug=True)
-    
+
 app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
