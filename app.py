@@ -9,19 +9,10 @@ Created on Thu Mar 14 19:56:15 2019
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-import psycopg2 as pg
 import pandas as pd 
-import pandas.io.sql as psql
-from dash.dependencies import Input, Output, State
-import dash_table_experiments as dt
-import plotly
-import flask
-import pandas as pd
-import numpy as np
+
 import plotly.graph_objs as go
-import os
-import plotly.plotly as py
-from plotly import graph_objs as go
+
 
 
 
