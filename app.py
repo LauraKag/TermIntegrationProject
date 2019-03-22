@@ -9,11 +9,6 @@ Created on Thu Mar 14 19:56:15 2019
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-import psycopg2 as pg
-import pandas as pd 
-
-
-
 
 
 
