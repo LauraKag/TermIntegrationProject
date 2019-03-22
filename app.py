@@ -21,10 +21,11 @@ a = pd.read_sql_query('select * from "JanJunData" limit 1;', conn)
 
 app = dash.Dash(__name__)
 server = app.server
-
+b=a["Incident ID"]
 
 app.layout = html.Div([
-    html.H2('Hello World'),
+    html.H2(b),
+
     dcc.Dropdown(
         id='dropdown',
         options=[{'label': i, 'value': i} for i in ['LA', 'NYC', 'MTL']],
