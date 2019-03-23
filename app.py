@@ -28,10 +28,6 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
 app.layout = html.Div([
     html.H1('IBERIA'),
     dcc.Tabs(id="tabs-example", value='tab-1-example', children=[
@@ -68,9 +64,9 @@ def render_content(tab):
 
     elif tab== 'tab-3-example':
         return html.Div([
-            html.H3('Tab content 2'),
-            generate_table(df)
+            html.H3('Tab content 2')
         ])
+        
 def generate_table(dataframe, max_rows=10):
     return html.Table(
         # Header
