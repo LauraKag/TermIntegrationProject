@@ -17,7 +17,7 @@ import plotly.graph_objs as go
 import collections
 import dash_table
 import dash_table_experiments as dt
-import json
+#import json
 import plotly
 from dash.dependencies import Input, Output,State
 import numpy as np
@@ -34,6 +34,7 @@ NEW1=NEW.dropna(subset=['Service'])
 
 NEW2=NEW1[['Domain', 'Month raised', 'Service', 'Incident ID', 'RESO']]
 NEW3=NEW2[pd.notnull(NEW2['Month raised'])]
+NEW3.columns=['Domain','Month raised','Service','Incident ID','Resolution time']
 #df1 = df[pd.notnull(df['SERVICE'])]
 #df2=df1[['DOMAIN', 'Month raised', 'SERVICE', 'CI Name', 'Reliability','Real Availability Application']]
 #df2=df2[pd.notnull(df2['Month raised'])]
