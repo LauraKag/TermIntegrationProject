@@ -1052,7 +1052,7 @@ def find_MTTRs(value):
 @app.callback(
    Output(component_id='reliability-graph', component_property='figure'),
    [Input(component_id='reliability', component_property='value')])
-def update_graph_Reliability(value):
+def update_graph_Reliability_new(value):
     ServiceDF=NEW[NEW['Service']==value]
     array = ['Critical', 'High']
     ServicesinMonthcritical=ServiceDF.loc[ServiceDF['Priority'].isin(array)]
@@ -1271,7 +1271,7 @@ def find_numbers_of_CH_Service(value):
             ],
             'layout': {
                 'title': "Critical and High Incidences ",
-                'xaxis': {'tickangle':"-90"}
+               # 'xaxis': {'tickangle':"-90"}
             }
         })
 
