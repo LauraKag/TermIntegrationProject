@@ -6,6 +6,9 @@ Created on Thu Mar 14 19:56:15 2019
 """
 #%%
 import dash
+#import base64
+#import datetime
+#import io
 import dash_core_components as dcc
 import dash_html_components as html
 import psycopg2 as pg
@@ -26,7 +29,7 @@ import numpy as np
 #NEW=pd.read_sql_query('select * from "Finaldata"', conn)
 #NEW=NEW.iloc[1:]
 
-NEW = pd.read_csv('Finaldata.csv', sep=',')
+NEW = pd.read_csv('C:/Users/laura/OneDrive/Desktop/Finaldata.csv', sep=',')
 NEW1=NEW.dropna(subset=['Service'])
 
 NEW2=NEW1[['Domain', 'Month raised', 'Service', 'Incident ID', 'RESO']]
@@ -98,9 +101,194 @@ def generate_table(dataframe, max_rows=10):
 
 
 tab1_layout = html.Div([
-            html.H3('Tab content 1'),
-            generate_table(NEW)
-    
+        html.Div([
+            html.Div([
+                html.H3('Incidence Volumes'),
+                dcc.RadioItems(
+                    id='VolumesInc',
+                    options=[{'label': 'January', 'value': 'January'},
+                    {'label': 'February', 'value': 'February'},
+                    {'label': 'March', 'value': 'March'},
+                    {'label': 'April', 'value': 'April'},
+                    {'label': 'May', 'value': 'May'},
+                    {'label': 'June', 'value': 'June'}],
+                    value='January',labelStyle={'display': 'inline-block'}),
+            dcc.Graph( id="VolumesInc-graph-app")
+            ],className='six columns'),
+            html.Div([
+                html.H3('Incidence Distribution'),
+                dcc.RadioItems(
+                    id='IncDistribution',
+                    options=[{'label': 'January', 'value': 'January'},
+                    {'label': 'February', 'value': 'February'},
+                    {'label': 'March', 'value': 'March'},
+                    {'label': 'April', 'value': 'April'},
+                    {'label': 'May', 'value': 'May'},
+                    {'label': 'June', 'value': 'June'}],
+                    value='January',labelStyle={'display': 'inline-block'}),
+            dcc.Graph( id="IncDistribution-graph-app")
+            ],className='six columns')
+            
+    ], className='row'),
+
+     html.Div([
+            html.Div([
+                html.H3('Resolution Rates'),
+                dcc.RadioItems(
+                    id='Resolution',
+                    options=[{'label': 'January', 'value': 'January'},
+                    {'label': 'February', 'value': 'February'},
+                    {'label': 'March', 'value': 'March'},
+                    {'label': 'April', 'value': 'April'},
+                    {'label': 'May', 'value': 'May'},
+                    {'label': 'June', 'value': 'June'}],
+                    value='January',labelStyle={'display': 'inline-block'}),
+            dcc.Graph( id="Resolution-graph-app")
+            ],className='six columns'),
+            html.Div([
+                html.H3('Incidence Volumes per Tower'),
+                dcc.RadioItems(
+                    id='TowerInc',
+                    options=[{'label': 'January', 'value': 'January'},
+                    {'label': 'February', 'value': 'February'},
+                    {'label': 'March', 'value': 'March'},
+                    {'label': 'April', 'value': 'April'},
+                    {'label': 'May', 'value': 'May'},
+                    {'label': 'June', 'value': 'June'}],
+                    value='January',labelStyle={'display': 'inline-block'}),
+            dcc.Graph( id="TowerInc-graph-app")
+            ],className='six columns')
+            
+    ], className='row'),
+
+    html.Div([
+            html.Div([
+                html.H3('Trend of Incidence Volumes'),
+                                dcc.Graph(
+                                    figure=go.Figure(
+                        data=[
+                            go.Scatter(
+                                y=[14, 21, 15, 32, 22, 27],
+                                x=['January','February','March','April','May','June'],
+                                name='Critical',
+                                
+                            ),
+                            go.Scatter(
+                                y=[296, 319, 369, 422, 372, 346],
+                                x=['January','February','March','April','May','June'],
+                                name='High',
+                                
+                                
+                            ),
+                            go.Scatter(
+                                y=[2303, 2255, 2407, 2463, 2439, 2639],
+                                x=['January','February','March','April','May','June'],
+                                name='Medium',
+                                
+                                
+                            ),
+                            go.Scatter(
+                                y=[4345, 3462, 3518, 3467, 3460, 3648],
+                                x=['January','February','March','April','May','June'],
+                                name='Low',
+                                
+                                
+                            ),
+                            go.Scatter(
+                                y=[4199, 3561, 3675, 3594, 3657, 3227],
+                                x=['January','February','March','April','May','June'],
+                                name='Access related',
+                                
+                                
+                            )
+                        ],
+                        layout=go.Layout(
+                            title='Trend of Incidence Volumes',
+                            showlegend=True,
+                            
+                        )
+                    ),
+                    style={'height': 500},
+                    id='my-graph'
+                )
+        ], className='six columns'),
+
+                html.Div([
+                      html.H3('Trend of MTTR'),
+                                    dcc.Graph(
+                                        figure=go.Figure(
+                            data=[
+                                go.Scatter(
+                                    y=[7, 3, 2, 5, 10, 11],
+                                    x=['January','February','March','April','May','June'],
+                                    name='Critical',
+                                    
+                                ),
+                                go.Scatter(
+                                    y= [26, 21, 35, 19, 30, 30],
+                                    x=['January','February','March','April','May','June'],
+                                    name='High',
+                                    
+                                    
+                                ),
+                                go.Scatter(
+                                    y=[108, 130, 139, 147, 141, 133],
+                                    x=['January','February','March','April','May','June'],
+                                    name='Medium',
+                                    
+                                    
+                                ),
+                                go.Scatter(
+                                    y=[134, 156, 146, 142, 133, 134],
+                                    x=['January','February','March','April','May','June'],
+                                    name='Low',
+                                    
+                                    
+                                ),
+                                go.Scatter(
+                                    y=[12, 12, 9, 8, 5, 6],
+                                    x=['January','February','March','April','May','June'],
+                                    name='Access related',
+                                    
+                                    
+                                )
+                            ],
+                            layout=go.Layout(
+                                title='Trend of MTTR',
+                                showlegend=True,
+                               
+                            )
+                        ),
+                        style={'height': 500},
+                        id='other-graph'
+                    )
+        ], className='six columns')
+
+    ],className='row'),
+
+    html.Div([
+        dcc.Upload(
+        id='upload-data',
+        children=html.Div([
+            'Drag and Drop or ',
+            html.A('Select Files')
+        ]),
+        style={
+            'width': '100%',
+            'height': '60px',
+            'lineHeight': '60px',
+            'borderWidth': '1px',
+            'borderStyle': 'dashed',
+            'borderRadius': '5px',
+            'textAlign': 'center',
+            'margin': '10px'
+        },
+        # Allow multiple files to be uploaded
+        multiple=True
+    ),
+    html.Div(id='output-data-upload'),
+],className="row")
+
         ])
 
 tab2_layout=html.Div([
@@ -204,7 +392,7 @@ tab2_layout=html.Div([
         ],className='row')
 
 
-            ])
+            ], style={"border-radius":"gray 3px"})
    
 
 
@@ -328,7 +516,199 @@ tab3_layout=html.Div([
                 ])
     ], className='row')
 
+#], style={"background-color":"gray"})
 ])
+
+@app.callback(
+   Output(component_id='VolumesInc-graph-app', component_property='figure'),
+   [Input(component_id='VolumesInc', component_property='value')])
+def Incidence_volumes(value):
+    Incidencemonth=NEW[NEW['Month raised']==value]
+    WithoutSSI=Incidencemonth[Incidencemonth['Assigned Group']!="SSI"]
+    WithSSI=Incidencemonth[Incidencemonth['Assigned Group']=="SSI"]
+    Numbers=[]
+
+    SelectAppcritical=WithoutSSI[WithoutSSI['Priority']=='Critical']
+    countedcritical=SelectAppcritical[['Incident ID']].count()
+    countedcritical.tolist()
+    countedcritical=countedcritical[0]
+    Numbers.append(countedcritical)
+
+    SelectApphigh=WithoutSSI[WithoutSSI['Priority']=='High']
+    countedhigh=SelectApphigh[['Incident ID']].count()
+    countedhigh.tolist()
+    countedhigh=countedhigh[0]
+    Numbers.append(countedhigh)
+
+    SelectAppmedium=WithoutSSI[WithoutSSI['Priority']=='Medium']
+    countedmedium=SelectAppmedium[['Incident ID']].count()
+    countedmedium.tolist()
+    countedmedium=countedmedium[0]
+    Numbers.append(countedmedium)
+    
+    
+    SelectApplow=WithoutSSI[WithoutSSI['Priority']=='Low']
+    countedlow=SelectApplow[['Incident ID']].count()
+    countedlow.tolist()
+    countedlow=countedlow[0]
+    Numbers.append(countedlow) 
+    
+    countedSSI=WithSSI[['Incident ID']].count()
+    countedSSI.tolist()
+    countedSSI=countedSSI[0]
+    Numbers.append(countedSSI)
+    
+    return ({'data': [
+                {'x': ["Critical","High","Medium","Low","Access related"], 'y': Numbers, 'type': 'bar',
+        'marker':{'color': ['purple','red','#52AF2B','#3871D7','#F97E05']}}
+                
+            ],
+            'layout': {
+                'title': "Incidence Volumes for {} in 2018".format(value)
+            }
+        }
+    )
+
+@app.callback(
+   Output(component_id='IncDistribution-graph-app', component_property='figure'),
+   [Input(component_id='IncDistribution', component_property='value')])
+def Incidence_volumes(value):
+    Incidencemonth=NEW[NEW['Month raised']==value]
+    WithoutSSI=Incidencemonth[Incidencemonth['Assigned Group']!="SSI"]
+    WithSSI=Incidencemonth[Incidencemonth['Assigned Group']=="SSI"]
+    Numbers=[]
+
+    SelectAppcritical=WithoutSSI[WithoutSSI['Priority']=='Critical']
+    countedcritical=SelectAppcritical[['Incident ID']].count()
+    countedcritical.tolist()
+    countedcritical=countedcritical[0]
+    Numbers.append(countedcritical)
+
+    SelectApphigh=WithoutSSI[WithoutSSI['Priority']=='High']
+    countedhigh=SelectApphigh[['Incident ID']].count()
+    countedhigh.tolist()
+    countedhigh=countedhigh[0]
+    Numbers.append(countedhigh)
+
+    SelectAppmedium=WithoutSSI[WithoutSSI['Priority']=='Medium']
+    countedmedium=SelectAppmedium[['Incident ID']].count()
+    countedmedium.tolist()
+    countedmedium=countedmedium[0]
+    Numbers.append(countedmedium)
+    
+    
+    SelectApplow=WithoutSSI[WithoutSSI['Priority']=='Low']
+    countedlow=SelectApplow[['Incident ID']].count()
+    countedlow.tolist()
+    countedlow=countedlow[0]
+    Numbers.append(countedlow) 
+    
+    countedSSI=WithSSI[['Incident ID']].count()
+    countedSSI.tolist()
+    countedSSI=countedSSI[0]
+    Numbers.append(countedSSI)
+    
+    return ({'data': [
+                {'values': Numbers,
+                 'labels':["Critical","High","Medium","Low","Access related"],
+                 'type': 'pie'}],
+  
+            'layout': {
+                'title': "Incidence Distribution for {} in 2018".format(value)
+            }
+        }
+    )
+
+
+@app.callback(
+   Output(component_id='Resolution-graph-app', component_property='figure'),
+   [Input(component_id='Resolution', component_property='value')])
+def Incidence_MTTRs(value):
+    Incidencemonth=NEW[NEW['Month raised']==value]
+    WithoutSSI=Incidencemonth[Incidencemonth['Assigned Group']!="SSI"]
+    #WithSSI=Incidencemonth[Incidencemonth['Assigned Group']=="SSI"]
+    
+    MTTRs=[]
+
+    SelectAppcritical=WithoutSSI[WithoutSSI['Priority']=='Critical']
+    countedcritical=SelectAppcritical["RESO"].mean()
+    countedcritical=round(countedcritical)
+    MTTRs.append(countedcritical)
+
+    SelectApphigh=WithoutSSI[WithoutSSI['Priority']=='High']
+    countedhigh=SelectApphigh["RESO"].mean()
+    countedhigh=round(countedhigh)
+    MTTRs.append(countedhigh)
+
+    SelectAppmedium=WithoutSSI[WithoutSSI['Priority']=='Medium']
+    countedmedium=SelectAppmedium["RESO"].mean()
+    countedmedium=round(countedmedium)
+    MTTRs.append(countedmedium)
+    
+    
+    SelectApplow=WithoutSSI[WithoutSSI['Priority']=='Low']
+    countedlow=SelectApplow["RESO"].mean()
+    countedlow=round(countedlow)
+    MTTRs.append(countedlow)
+    
+    return ({'data': [
+                {'x': ["Critical","High","Medium","Low"], 'y': MTTRs, 'type': 'bar',
+        'marker':{'color': ['purple','red','#52AF2B','#3871D7']}}
+                
+            ],
+            'layout': {
+                'title': "Resolution Rates for {} in 2018".format(value)
+            }
+        }
+    )
+
+
+@app.callback(
+   Output(component_id='TowerInc-graph-app', component_property='figure'),
+   [Input(component_id='TowerInc', component_property='value')])
+def find_numbers_of_CH_Tower(value):
+    Monthsdf=NEW[NEW['Month raised']==value]
+    array = ['Critical', 'High']
+    AppsinMonthcritical=Monthsdf.loc[Monthsdf['Priority'].isin(array)]
+    AppsinMonthA=AppsinMonthcritical['Tower Group'].unique()
+    AppsinMonthA=[x for x in AppsinMonthA if str(x) != 'nan']
+    AppsinMonthCriticalonly=Monthsdf[Monthsdf['Priority']=='Critical']
+    AppsinMonthACritical=AppsinMonthCriticalonly['Tower Group'].unique()
+    AppsinMonthACritical=[x for x in AppsinMonthACritical if str(x) != 'nan']
+    CriticalIncidences=[] 
+    HighIncidences=[]
+    for i in AppsinMonthA:
+        SortbyApp=AppsinMonthcritical[AppsinMonthcritical['Tower Group']==i]
+        Critical=SortbyApp[SortbyApp['Priority']=="Critical"]
+        counted=Critical[['Incident ID']].count()
+        counted.tolist()
+        counted=counted[0]
+        CriticalIncidences.append(counted) 
+        High=SortbyApp[SortbyApp['Priority']=="High"]
+        counted2=High[['Incident ID']].count()
+        counted2.tolist()
+        counted2=counted2[0]
+        HighIncidences.append(counted2)
+        CriticalIncidences=list(filter(lambda a: a != 0, CriticalIncidences)) 
+
+        CriticalIncidencesnew=sorted(CriticalIncidences, key=float, reverse=True)
+        AppsinMonthACriticalnew = [x for _,x in sorted(zip(CriticalIncidences,AppsinMonthACritical))]
+        #AppsinMonthAnew=[x for _,x in sorted(zip(CriticalIncidences,AppsinMonthA))]
+        #HighIncidencesnew
+
+       
+    return ({'data': [
+                {'x': AppsinMonthACriticalnew, 'y': CriticalIncidencesnew, 'type': 'bar', 'name': "Critical" },
+                {'x': AppsinMonthA, 'y': HighIncidences, 'type': 'bar', 'name': "High"}
+            ],
+            'layout': {
+                'title': "Incidence Volumes per Tower",
+                #'xaxis': {'tickangle':"-90"}
+            }
+        })
+
+
+
 
 
 @app.callback(
@@ -470,6 +850,7 @@ def update_MTTR(value):
     MTTRlow=[]
     for i in AppsMonths:
         SelectAppmonth=SelectApp[SelectApp['Month raised']==i]
+        SelectAppmonth=SelectAppmonth[SelectAppmonth['Assigned Group']!="SSI"]
         SelectApplow=SelectAppmonth[SelectAppmonth['Priority']=='Low']
         MTTRlows=SelectApplow['RESO'].mean()
         if str(MTTRlows)=='nan':
@@ -528,6 +909,7 @@ def update_Numbers(value):
     Numberlow=[]
     for i in AppsMonths:
         SelectAppmonth=SelectApp[SelectApp['Month raised']==i]
+        SelectAppmonth=SelectAppmonth[SelectAppmonth['Assigned Group']!="SSI"]
         SelectApplow=SelectAppmonth[SelectAppmonth['Priority']=='Low']
         countedlow=SelectApplow[['Incident ID']].count()
         countedlow.tolist()
@@ -604,9 +986,63 @@ def find_numbers_of_CH_App(value):
             ],
             'layout': {
                 'title': "Critical and High Incidences for ".format(value),
-               # 'xaxis': {'tickangle':"-90"}
+                'xaxis': {'tickangle':"-90"}
             }
         })
+
+
+@app.callback(
+Output(component_id='MTTRsAll-graph-app', component_property='figure'),
+[Input(component_id='MTTRsAll', component_property='value')])
+def find_MTTRs(value):
+    Monthsdf=NEW[NEW['Month raised']==value]
+    #array = ['Critical', 'High']
+    
+    AppsinMonthcritical=Monthsdf[Monthsdf['Priority']=="High"]
+    AppsinMonthA=AppsinMonthcritical['CI Name'].unique()
+    AppsinMonthA=[x for x in AppsinMonthA if str(x) != 'nan']
+    AppsinMonthCriticalonly=Monthsdf[Monthsdf['Priority']=='Critical']
+    AppsinMonthACritical=AppsinMonthCriticalonly['CI Name'].unique()
+    AppsinMonthACritical=[x for x in AppsinMonthACritical if str(x) != 'nan']
+    CriticalIncidences=[] 
+    HighIncidences=[]
+    for i in AppsinMonthACritical:
+        SortbyApp=AppsinMonthCriticalonly[AppsinMonthCriticalonly['CI Name']==i]
+        #Critical=SortbyApp[SortbyApp['Priority']=="Critical"]
+        counted=SortbyApp["RESO"].mean()
+        counted=round(counted,2)
+        if counted !=0.0:
+            CriticalIncidences.append(counted) 
+       
+    for i in AppsinMonthA:
+        SortbyAppA=AppsinMonthcritical[AppsinMonthcritical['CI Name']==i]
+        #High=SortbyAppA[SortbyAppA['Priority']=="High"]
+        counted2=SortbyAppA["RESO"].mean()
+        counted2=round(counted2,2)
+        if counted2!=0.0:
+            HighIncidences.append(counted2)
+        
+        CriticalIncidences=list(filter(lambda a: a != 0, CriticalIncidences)) 
+        CriticalIncidencesnew=sorted(CriticalIncidences, key=float, reverse=True)
+        AppsinMonthACriticalnew = [x for _,x in sorted(zip(CriticalIncidences,AppsinMonthACritical))]
+
+       
+    return ({'data': [
+                {'x': AppsinMonthACriticalnew, 'y': CriticalIncidencesnew, 'type': 'bar', 'name': "Critical" },
+                {'x': AppsinMonthA, 'y': HighIncidences, 'type': 'bar', 'name': "High"}
+            ],
+            'layout': {
+                'title': "MTTRs for ".format(value),
+                'xaxis': {'tickangle':"-90"}
+            }
+        })
+
+
+
+
+
+
+
 
 
 
@@ -796,39 +1232,98 @@ def update_figure(rows, selected_row_indices):
 @app.callback(
 Output(component_id='numberHIGH', component_property='figure'),
 [Input(component_id='NumberHIGH', component_property='value')])
-def find_numbers_of_CH(value):
+def find_numbers_of_CH_Service(value):
     Monthsdf=NEW[NEW['Month raised']==value]
     array = ['Critical', 'High']
-    ServicesinMonthcritical=Monthsdf.loc[Monthsdf['Priority'].isin(array)]
-    ServicesinMonthA=ServicesinMonthcritical['Service'].unique()
-    ServicesinMonthA=[x for x in ServicesinMonthA if str(x) != 'nan']
-    ServicesinMonthCriticalonly=Monthsdf[Monthsdf['Priority']=='Critical']
-    ServicesinMonthACritical=ServicesinMonthCriticalonly['CI Name'].unique()
-    ServicesinMonthACritical=[x for x in ServicesinMonthACritical if str(x) != 'nan']
+    AppsinMonthcritical=Monthsdf.loc[Monthsdf['Priority'].isin(array)]
+    AppsinMonthA=AppsinMonthcritical['Service'].unique()
+    AppsinMonthA=[x for x in AppsinMonthA if str(x) != 'nan']
+    AppsinMonthCriticalonly=Monthsdf[Monthsdf['Priority']=='Critical']
+    AppsinMonthACritical=AppsinMonthCriticalonly['Service'].unique()
+    AppsinMonthACritical=[x for x in AppsinMonthACritical if str(x) != 'nan']
     CriticalIncidences=[] 
     HighIncidences=[]
-    for i in ServicesinMonthA:
-        SortbyService=ServicesinMonthcritical[ServicesinMonthcritical['Service']==i]
-        Critical=SortbyService[SortbyService['Priority']=="Critical"]
+    for i in AppsinMonthA:
+        SortbyApp=AppsinMonthcritical[AppsinMonthcritical['Service']==i]
+        Critical=SortbyApp[SortbyApp['Priority']=="Critical"]
         counted=Critical[['Incident ID']].count()
         counted.tolist()
         counted=counted[0]
         CriticalIncidences.append(counted) 
-        High=SortbyService[SortbyService['Priority']=="High"]
+        High=SortbyApp[SortbyApp['Priority']=="High"]
         counted2=High[['Incident ID']].count()
         counted2.tolist()
         counted2=counted2[0]
         HighIncidences.append(counted2)
         CriticalIncidences=list(filter(lambda a: a != 0, CriticalIncidences)) 
 
+        CriticalIncidencesnew=sorted(CriticalIncidences, key=float, reverse=True)
+        AppsinMonthACriticalnew = [x for _,x in sorted(zip(CriticalIncidences,AppsinMonthACritical))]
+        #AppsinMonthAnew=[x for _,x in sorted(zip(CriticalIncidences,AppsinMonthA))]
+        #HighIncidencesnew
+
+       
     return ({'data': [
-                {'x': ServicesinMonthACritical, 'y': CriticalIncidences, 'type': 'bar', 'name': "Critical" },
-                {'x': ServicesinMonthA, 'y': HighIncidences, 'type': 'bar', 'name': "High"}
+                {'x': AppsinMonthACriticalnew, 'y': CriticalIncidencesnew, 'type': 'bar', 'name': "Critical" },
+                {'x': AppsinMonthA, 'y': HighIncidences, 'type': 'bar', 'name': "High"}
             ],
             'layout': {
-                'title': "Incidence Volumes ".format(value)
+                'title': "Critical and High Incidences for ".format(value),
+                'xaxis': {'tickangle':"-90"}
             }
         })
+
+
+
+
+def parse_contents(contents, filename, date):
+    content_type, content_string = contents.split(',')
+
+    decoded = base64.b64decode(content_string)
+    try:
+        if 'csv' in filename:
+            # Assume that the user uploaded a CSV file
+            df = pd.read_csv(
+                io.StringIO(decoded.decode('utf-8')))
+        elif 'xls' in filename:
+            # Assume that the user uploaded an excel file
+            df = pd.read_excel(io.BytesIO(decoded))
+    except Exception as e:
+        print(e)
+        return html.Div([
+            'There was an error processing this file.'
+        ])
+
+    return html.Div([
+        html.H5(filename),
+        html.H6(datetime.datetime.fromtimestamp(date)),
+
+        dash_table.DataTable(
+            data=df.to_dict('rows'),
+            columns=[{'name': i, 'id': i} for i in df.columns]
+        ),
+
+        html.Hr(),  # horizontal line
+
+        # For debugging, display the raw contents provided by the web browser
+        html.Div('Raw Content'),
+        html.Pre(contents[0:200] + '...', style={
+            'whiteSpace': 'pre-wrap',
+            'wordBreak': 'break-all'
+        })
+    ])
+
+
+@app.callback(Output('output-data-upload', 'children'),
+              [Input('upload-data', 'contents')],
+              [State('upload-data', 'filename'),
+               State('upload-data', 'last_modified')])
+def update_output(list_of_contents, list_of_names, list_of_dates):
+    if list_of_contents is not None:
+        children = [
+            parse_contents(c, n, d) for c, n, d in
+            zip(list_of_contents, list_of_names, list_of_dates)]
+        return children
 
     
 app.css.append_css({
