@@ -21,12 +21,12 @@ import numpy as np
 
 #from dash.exceptions import PreventUpdate
 
-#conn = pg.connect("postgres://svaoxmufmplmsu:8a40bddf7d6d4bd1bec788f91feacdbdcb0404d83aeda1ac6b40410340eea95b@ec2-75-101-131-79.compute-1.amazonaws.com:5432/d62btbprhf4ja3")
+conn = pg.connect("postgres://svaoxmufmplmsu:8a40bddf7d6d4bd1bec788f91feacdbdcb0404d83aeda1ac6b40410340eea95b@ec2-75-101-131-79.compute-1.amazonaws.com:5432/d62btbprhf4ja3")
 
-#NEW=pd.read_sql_query('select * from "Finaldata"', conn)
-#NEW=NEW.iloc[1:]
+NEW=pd.read_sql_query('select * from "Finaldata"', conn)
+NEW=NEW.iloc[1:]
 
-NEW = pd.read_csv('C:/Users/laura/OneDrive/Desktop/Finaldata.csv', sep=',')
+#NEW = pd.read_csv('C:/Users/laura/OneDrive/Desktop/Finaldata.csv', sep=',')
 NEW1=NEW.dropna(subset=['Service'])
 
 NEW2=NEW1[['Domain', 'Month raised', 'Service', 'Incident ID', 'RESO']]
