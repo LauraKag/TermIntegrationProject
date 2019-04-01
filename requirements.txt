@@ -36,3 +36,4 @@ Werkzeug==0.14.1
 wincertstore==0.2
 Input==0.0.0
 Output==1.0.1
+dash-table-experiments==0.6.0
