@@ -1269,7 +1269,7 @@ def find_numbers_of_CH_Service(value):
                 {'x': AppsinMonthA, 'y': HighIncidences, 'type': 'bar', 'name': "High"}
             ],
             'layout': {
-                'title': "Critical and High Incidences for ".format(value),
+                'title': "Critical and High Incidences ",
                 'xaxis': {'tickangle':"-90"}
             }
         })
