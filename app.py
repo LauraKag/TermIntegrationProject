@@ -284,7 +284,7 @@ tab1_layout = html.Div([
             'margin': '10px'
         },
         # Allow multiple files to be uploaded
-        multiple=True
+        #multiple=True
     ),
     html.Div(id='output-data-upload'),
 ],className="row")
