@@ -509,10 +509,11 @@ tab3_layout=html.Div([
                     selected_row_indices=[],
                     id='datatable-gapminder'
                 ),
-                html.Div(id='selected-indexes'),
-                html.Div([
-                   dcc.Graph(id='graph-gapminder'),
-                ],className="container") 
+                html.Div(id='selected-indexes')
+                #,
+                #html.Div([
+                  # dcc.Graph(id='graph-gapminder'),
+                #],className="container") 
                 ])
     ], className='row')
 
@@ -1186,27 +1187,27 @@ def update_selected_row_indices(clickData, selected_row_indices):
                 selected_row_indices.append(point['pointNumber'])
     return selected_row_indices
 
-@app.callback(
-    Output('graph-gapminder', 'figure'),
-    [Input('datatable-gapminder', 'rows'),
-     Input('datatable-gapminder', 'selected_row_indices')])
-def update_figure(rows, selected_row_indices):
-    dff = pd.DataFrame(rows)
-    fig = plotly.tools.make_subplots(
-        rows=2, cols=1,
-        subplot_titles=('Original Availability', 'New Availability'),
-        shared_xaxes=True)
-    marker = {'color': ['#0074D9']*len(dff)}
-    for i in (selected_row_indices or []):
-        marker['color'][i] = '#FF851B'
-    trace1=go.Scatter(
-        x=[1,2,3],
-        y= [1,2,3],
-    )
-    trace2=go.Scatter(
-        x=[1,2,3],
-        y= [4,5,6],
-    )
+#@app.callback(
+  #  Output('graph-gapminder', 'figure'),
+  #  [Input('datatable-gapminder', 'rows'),
+  #   Input('datatable-gapminder', 'selected_row_indices')])
+#def update_figure(rows, selected_row_indices):
+    #dff = pd.DataFrame(rows)
+    #fig = plotly.tools.make_subplots(
+       # rows=2, cols=1,
+      #  subplot_titles=('Original Availability', 'New Availability'),
+      #  shared_xaxes=True)
+    #marker = {'color': ['#0074D9']*len(dff)}
+    #for i in (selected_row_indices or []):
+       # marker['color'][i] = '#FF851B'
+    #trace1=go.Scatter(
+       # x=[1,2,3],
+       # y= [1,2,3],
+    #)
+    #trace2=go.Scatter(
+      #  x=[1,2,3],
+      #  y= [4,5,6],
+    #)
     
     #fig['layout']['showlegend'] = False
     #fig['layout']['height'] = 800
@@ -1217,13 +1218,13 @@ def update_figure(rows, selected_row_indices):
        # 'b': 200
     #}
     #fig['layout']['yaxis3']['type'] = 'log'
-    data=[trace1,trace2]
-    layout = go.Layout(
-      title="Original - Manually corrected Availability"
-    )
+    #data=[trace1,trace2]
+    #layout = go.Layout(
+      #title="Original - Manually corrected Availability"
+    #)
     
-    fig=go.Figure(data=data,layout=layout)
-    return fig
+    #fig=go.Figure(data=data,layout=layout)
+    #return fig
 
 
 
