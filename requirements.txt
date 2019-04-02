@@ -37,5 +37,8 @@ wincertstore==0.2
 Input==0.0.0
 Output==1.0.1
 dash-table-experiments==0.6.0
+dash-auth==1.2.3
+flask-seasurf==0.2.2
+ua-parser==0.8.0
 
 

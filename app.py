@@ -10,6 +10,7 @@ import dash
 #import datetime
 #import io
 import dash_core_components as dcc
+import dash_auth
 import dash_html_components as html
 import psycopg2 as pg
 import pandas as pd
@@ -28,6 +29,12 @@ import numpy as np
 
 #NEW=pd.read_sql_query('select * from "Finaldata"', conn)
 #NEW=NEW.iloc[1:]
+
+USERNAME_PASSWORD_PAIRS = [
+    ['laura.kageneck@student.ie.edu', 'Molly123'],['admin1', 'admin1'],['admin2', 'admin2'],['admin3', 'admin3']
+]
+
+auth = dash_auth.BasicAuth(app,USERNAME_PASSWORD_PAIRS)
 
 NEW = pd.read_csv('Finaldata.csv', sep=',')
 NEW1=NEW.dropna(subset=['Service'])
