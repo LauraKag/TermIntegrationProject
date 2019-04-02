@@ -29,7 +29,7 @@ import numpy as np
 #NEW=pd.read_sql_query('select * from "Finaldata"', conn)
 #NEW=NEW.iloc[1:]
 
-NEW = pd.read_csv('C:/Users/laura/OneDrive/Documents/GitHub/TermIntegrationProject/Finaldata.csv', sep=',')
+NEW = pd.read_csv('Finaldata.csv', sep=',')
 NEW1=NEW.dropna(subset=['Service'])
 
 NEW2=NEW1[['Domain', 'Month raised', 'Service', 'Incident ID', 'RESO']]
