@@ -29,6 +29,9 @@ import numpy as np
 
 #NEW=pd.read_sql_query('select * from "Finaldata"', conn)
 #NEW=NEW.iloc[1:]
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
 
 USERNAME_PASSWORD_PAIRS = [
     ['laura.kageneck@student.ie.edu', 'Molly123'],['admin1', 'admin1'],['admin2', 'admin2'],['admin3', 'admin3']
@@ -56,10 +59,8 @@ Apps=Apps.tolist()
 Apps.sort()
 
 
-#%% Set Up Layout 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-server = app.server
+ 
+
 
 app.config['suppress_callback_exceptions']=True
 
