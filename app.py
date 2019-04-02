@@ -60,7 +60,7 @@ app.layout = html.Div([
 
      html.Div([
             html.Div(
-                html.Img(src='img/Capture.PNG',style={"float":"top-left"})
+                html.Img(src='https://noticiasbancarias.com/wp-content/uploads/2012/08/IAG.png',style={"float":"top-left", "height":"100px", "width": "auto"})
                 ,style={"float":"top-left","height":"200px"})
             ]
             ),
