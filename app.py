@@ -10,7 +10,7 @@ import dash
 #import datetime
 #import io
 import dash_core_components as dcc
-#import dash_auth
+import dash_auth
 import dash_html_components as html
 import psycopg2 as pg
 import pandas as pd
@@ -33,11 +33,11 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 
-#USERNAME_PASSWORD_PAIRS = [
-    #['laura.kageneck@student.ie.edu', 'Molly123'],['admin1', 'admin1'],['admin2', 'admin2'],['admin3', 'admin3']
-#]
+USERNAME_PASSWORD_PAIRS = [
+    ['laura.kageneck@student.ie.edu', 'Molly123'],['admin1', 'admin1'],['admin2', 'admin2'],['admin3', 'admin3']
+]
 
-#auth = dash_auth.BasicAuth(app,USERNAME_PASSWORD_PAIRS)
+auth = dash_auth.BasicAuth(app,USERNAME_PASSWORD_PAIRS)
 
 server = app.server
 
