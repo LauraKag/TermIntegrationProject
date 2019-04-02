@@ -104,7 +104,7 @@ def generate_table(dataframe, max_rows=10):
 tab1_layout = html.Div([
         html.Div([
             html.Div([
-                html.H3('Incidence Volumes'),
+                html.H3('Incidence Volumes', style={"text-align":"center"}),
                 dcc.RadioItems(
                     id='VolumesInc',
                     options=[{'label': 'January', 'value': 'January'},
@@ -113,9 +113,9 @@ tab1_layout = html.Div([
                     {'label': 'April', 'value': 'April'},
                     {'label': 'May', 'value': 'May'},
                     {'label': 'June', 'value': 'June'}],
-                    value='January',labelStyle={'display': 'inline-block'}),
+                    value='January',labelStyle={'display': 'inline-block'}, "text-align":"center"),
             dcc.Graph( id="VolumesInc-graph-app")
-            ],className='six columns'),
+            ],className='six columns', style={"background-color":"white","margin":"20px"}),
             html.Div([
                 html.H3('Incidence Distribution'),
                 dcc.RadioItems(
@@ -126,15 +126,15 @@ tab1_layout = html.Div([
                     {'label': 'April', 'value': 'April'},
                     {'label': 'May', 'value': 'May'},
                     {'label': 'June', 'value': 'June'}],
-                    value='January',labelStyle={'display': 'inline-block'}),
+                    value='January',labelStyle={'display': 'inline-block'}, "text-align":"center"),
             dcc.Graph( id="IncDistribution-graph-app")
             ],className='six columns')
             
-    ], className='row'),
+    ], className='row',style={"background-color":"#e6e9ef"}),
 
      html.Div([
             html.Div([
-                html.H3('Resolution Rates'),
+                html.H3('Resolution Rates', style={"text-align":"center"}),
                 dcc.RadioItems(
                     id='Resolution',
                     options=[{'label': 'January', 'value': 'January'},
@@ -143,9 +143,9 @@ tab1_layout = html.Div([
                     {'label': 'April', 'value': 'April'},
                     {'label': 'May', 'value': 'May'},
                     {'label': 'June', 'value': 'June'}],
-                    value='January',labelStyle={'display': 'inline-block'}),
+                    value='January',labelStyle={'display': 'inline-block'}, "text-align":"center"),
             dcc.Graph( id="Resolution-graph-app")
-            ],className='six columns'),
+            ],className='six columns', style={"background-color":"white","margin":"20px"}),
             html.Div([
                 html.H3('Incidence Volumes per Tower'),
                 dcc.RadioItems(
@@ -160,7 +160,7 @@ tab1_layout = html.Div([
             dcc.Graph( id="TowerInc-graph-app")
             ],className='six columns')
             
-    ], className='row'),
+    ], className='row',style={"background-color":"#e6e9ef"}),
 
     html.Div([
             html.Div([
