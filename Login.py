@@ -21,8 +21,8 @@ def login():
    
         else:
             error = 'Insert valid credentials to continue'
-    return render_template('login.html', error=error)
+    return render_template('register.html', error=error)
 
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     app.run()
