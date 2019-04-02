@@ -60,7 +60,7 @@ app.layout = html.Div([
 
      html.Div([
             html.Div(
-                html.Img(src='img/Capture.jng' style={"height":"100px", "width":"auto","float":"top-left"})
+                html.Img(src='img/Capture.PNG',style={"height":"100px", "width":"auto","float":"top-left"})
                 ,style={"float":"top-left","height":"200px"})
             ]
             ),
