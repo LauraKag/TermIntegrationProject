@@ -31,13 +31,15 @@ import numpy as np
 #NEW=NEW.iloc[1:]
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-server = app.server
+
 
 USERNAME_PASSWORD_PAIRS = [
     ['laura.kageneck@student.ie.edu', 'Molly123'],['admin1', 'admin1'],['admin2', 'admin2'],['admin3', 'admin3']
 ]
 
 auth = dash_auth.BasicAuth(app,USERNAME_PASSWORD_PAIRS)
+
+server = app.server
 
 NEW = pd.read_csv('Finaldata.csv', sep=',')
 NEW1=NEW.dropna(subset=['Service'])
