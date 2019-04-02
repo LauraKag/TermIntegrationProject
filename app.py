@@ -44,7 +44,7 @@ server = app.server
 NEW = pd.read_csv('Finaldata.csv', sep=',')
 NEW1=NEW.dropna(subset=['Service'])
 
-NEW2=NEW1[['Domain', 'Month raised', 'Service', 'Incident ID', 'RESO']]
+NEW2=NEW1[['Domain', 'Month raised', 'Service', 'Incident ID', 'Resolution time']]
 NEW3=NEW2[pd.notnull(NEW2['Month raised'])]
 NEW3.columns=['Domain','Month raised','Service','Incident ID','Resolution time']
 #df1 = df[pd.notnull(df['SERVICE'])]
