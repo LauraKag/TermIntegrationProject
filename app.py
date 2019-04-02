@@ -29,7 +29,7 @@ import numpy as np
 #NEW=pd.read_sql_query('select * from "Finaldata"', conn)
 #NEW=NEW.iloc[1:]
 
-NEW = pd.read_csv('Finaldata.csv', sep=',')
+NEW = pd.read_csv('C:/Users/laura/OneDrive/Documents/GitHub/TermIntegrationProject/Finaldata.csv', sep=',')
 NEW1=NEW.dropna(subset=['Service'])
 
 NEW2=NEW1[['Domain', 'Month raised', 'Service', 'Incident ID', 'RESO']]
@@ -60,8 +60,10 @@ app.layout = html.Div([
 
      html.Div([
             html.Div(
-                html.Img(src='https://noticiasbancarias.com/wp-content/uploads/2012/08/IAG.png',style={"float":"top-left", "height":"180px", "width": "auto"})
-                ,style={"float":"top-left","height":"200px","background-color":"#e6e9ef"})
+                html.Img(src='https://noticiasbancarias.com/wp-content/uploads/2012/08/IAG.png',style={"float":"top-left", "height":"180px", "width": "auto"}),
+                #html.Img(src='https://cdn3.iconfinder.com/data/icons/rounded-monosign/142/logout-512.png', style={"float":"top-right", "height":"100px", "width": "auto"}),
+                style={"float":"top-left","height":"200px","background-color":"#97a9c9"}
+                )
             ]
             ),
     html.Div([ 
@@ -104,7 +106,7 @@ def generate_table(dataframe, max_rows=10):
 tab1_layout = html.Div([
         html.Div([
             html.Div([
-                html.H3('Incidence Volumes', style={"text-align":"center"}),
+                html.H3('Incidence Volumes', style={"text-align":"center", "padding":"30px"}),
                 dcc.RadioItems(
                     id='VolumesInc',
                     options=[{'label': 'January', 'value': 'January'},
@@ -113,11 +115,11 @@ tab1_layout = html.Div([
                     {'label': 'April', 'value': 'April'},
                     {'label': 'May', 'value': 'May'},
                     {'label': 'June', 'value': 'June'}],
-                    value='January',labelStyle={'display': 'inline-block'}, "text-align":"center"),
+                    value='January',labelStyle={'display': 'inline-block'},style={"text-align":"center"} ),
             dcc.Graph( id="VolumesInc-graph-app")
-            ],className='six columns', style={"background-color":"white","margin":"20px"}),
+            ],className='six columns', style={"background-color":"white","margin":"10px"}),
             html.Div([
-                html.H3('Incidence Distribution'),
+                html.H3('Incidence Distribution',  style={"text-align":"center", "padding":"30px"}),
                 dcc.RadioItems(
                     id='IncDistribution',
                     options=[{'label': 'January', 'value': 'January'},
@@ -126,15 +128,15 @@ tab1_layout = html.Div([
                     {'label': 'April', 'value': 'April'},
                     {'label': 'May', 'value': 'May'},
                     {'label': 'June', 'value': 'June'}],
-                    value='January',labelStyle={'display': 'inline-block'}, "text-align":"center"),
+                    value='January',labelStyle={'display': 'inline-block'},style={"text-align":"center"}),
             dcc.Graph( id="IncDistribution-graph-app")
-            ],className='six columns')
+            ],className='six columns', style={"background-color":"white","margin":"10px"})
             
     ], className='row',style={"background-color":"#e6e9ef"}),
 
      html.Div([
             html.Div([
-                html.H3('Resolution Rates', style={"text-align":"center"}),
+                html.H3('Resolution Rates', style={"text-align":"center", "padding":"30px"}),
                 dcc.RadioItems(
                     id='Resolution',
                     options=[{'label': 'January', 'value': 'January'},
@@ -143,11 +145,11 @@ tab1_layout = html.Div([
                     {'label': 'April', 'value': 'April'},
                     {'label': 'May', 'value': 'May'},
                     {'label': 'June', 'value': 'June'}],
-                    value='January',labelStyle={'display': 'inline-block'}, "text-align":"center"),
+                    value='January',labelStyle={'display': 'inline-block'},style={"text-align":"center"} ),
             dcc.Graph( id="Resolution-graph-app")
-            ],className='six columns', style={"background-color":"white","margin":"20px"}),
+            ],className='six columns', style={"background-color":"white","margin":"10px"}),
             html.Div([
-                html.H3('Incidence Volumes per Tower'),
+                html.H3('Incidence Volumes per Tower', style={"text-align":"center", "padding":"30px"}),
                 dcc.RadioItems(
                     id='TowerInc',
                     options=[{'label': 'January', 'value': 'January'},
@@ -156,15 +158,15 @@ tab1_layout = html.Div([
                     {'label': 'April', 'value': 'April'},
                     {'label': 'May', 'value': 'May'},
                     {'label': 'June', 'value': 'June'}],
-                    value='January',labelStyle={'display': 'inline-block'}),
+                    value='January',labelStyle={'display': 'inline-block'} ,style={"text-align":"center"} ),
             dcc.Graph( id="TowerInc-graph-app")
-            ],className='six columns')
+            ],className='six columns',style={"background-color":"white","margin":"10px"})
             
     ], className='row',style={"background-color":"#e6e9ef"}),
 
     html.Div([
             html.Div([
-                html.H3('Trend of Incidence Volumes'),
+                html.H3('Trend of Incidence Volumes',style={"text-align":"center","padding-top":"20px"}),
                                 dcc.Graph(
                                     figure=go.Figure(
                         data=[
@@ -204,18 +206,18 @@ tab1_layout = html.Div([
                             )
                         ],
                         layout=go.Layout(
-                            title='Trend of Incidence Volumes',
+                           
                             showlegend=True,
                             
                         )
                     ),
-                    style={'height': 500},
+                    style={'height': 450},
                     id='my-graph'
                 )
-        ], className='six columns'),
+        ], className='six columns',style={"background-color":"white","margin":"10px"}),
 
                 html.Div([
-                      html.H3('Trend of MTTR'),
+                      html.H3('Trend of MTTR', style={"text-align":"center", "padding-top":"20px"}),
                                     dcc.Graph(
                                         figure=go.Figure(
                             data=[
@@ -255,17 +257,20 @@ tab1_layout = html.Div([
                                 )
                             ],
                             layout=go.Layout(
-                                title='Trend of MTTR',
+                                
                                 showlegend=True,
+                                yaxis=dict(
+                                title='Hours'
+                                )
                                
                             )
                         ),
-                        style={'height': 500},
+                        style={'height': 450},
                         id='other-graph'
                     )
-        ], className='six columns')
+        ], className='six columns',style={"background-color":"white","margin":"10px"})
 
-    ],className='row'),
+    ],className='row',style={"background-color":"#e6e9ef"}),
 
     #html.Div([
        # dcc.Upload(
@@ -295,47 +300,47 @@ tab1_layout = html.Div([
 tab2_layout=html.Div([
     html.Div([
             html.Div([
-                html.H3('Reliability for Critical and High Incidences'),
+                html.H3('Reliability for Critical and High Incidences',style={"text-align":"center", "padding":"30px"}),
                 dcc.Dropdown(
                     id='Reliability',
                     options=[{'label':name, 'value':name} for name in Apps],
                     value='CKI'),
             dcc.Graph( id="reliability-graph-app")
-            ],className='six columns'),
+            ],className='six columns',style={"background-color":"white","margin":"10px"}),
             html.Div([
-                html.H3('Availability for Critical and High Incidences'),
+                html.H3('Availability for Critical and High Incidences', style={"text-align":"center", "padding":"30px"}),
                 dcc.Dropdown(
                     id='availabilityApp',
                     options=[{'label':name, 'value':name} for name in Apps],
                     value='CKI'),
             dcc.Graph( id="availability-graph-app")
-            ],className='six columns')
+            ],className='six columns',style={"background-color":"white","margin":"10px"})
             
-    ], className='row'),
+    ], className='row',style={"background-color":"#e6e9ef"}),
 
      html.Div([
             html.Div([
-                html.H3('MTTRs for Critical, High, Medium and Low Incidences'),
+                html.H3('Incidence MTTR', style={"text-align":"center", "padding":"30px"}),
                 dcc.Dropdown(
                     id='MTTRs',
                     options=[{'label':name, 'value':name} for name in Apps],
                     value='CKI'),
             dcc.Graph( id="mttr-graph-app")
-            ],className='six columns'),
+            ],className='six columns',style={"background-color":"white","margin":"10px"}),
             html.Div([
-                html.H3('Number of Critical, High, Medium and Low Incidences'),
+                html.H3('Incidence Volumes', style={"text-align":"center", "padding":"30px"}),
                 dcc.Dropdown(
                     id='Numbers',
                     options=[{'label':name, 'value':name} for name in Apps],
                     value='CKI'),
             dcc.Graph( id="numbers-graph-app")
-            ],className='six columns')
+            ],className='six columns',style={"background-color":"white","margin":"10px"})
             
-    ], className='row'),
+    ], className='row',style={"background-color":"#e6e9ef"}),
 
     html.Div([
             html.Div([
-                html.H3('Reliabilities for Critical and High Incidences'),
+                html.H3('Reliabilities for Critical and High Incidences', style={"text-align":"center", "padding":"30px"}),
                 dcc.RadioItems(
                     id='ReliabilityAll',
                     options=[{'label': 'January', 'value': 'January'},
@@ -344,11 +349,11 @@ tab2_layout=html.Div([
                     {'label': 'April', 'value': 'April'},
                     {'label': 'May', 'value': 'May'},
                     {'label': 'June', 'value': 'June'}],
-                    value='January',labelStyle={'display': 'inline-block'}),
+                    value='January',labelStyle={'display': 'inline-block'},style={"text-align":"center"} ),
             dcc.Graph( id="reliabilities-graph-app")
-            ],className='six columns'),
+            ],className='six columns',style={"background-color":"white","margin":"10px"}),
             html.Div([
-                html.H3('Availabilities for Critical and High Incidences'),
+                html.H3('Availabilities for Critical and High Incidences', style={"text-align":"center", "padding":"30px"}),
                 dcc.RadioItems(
                     id='availabilityAppAll',
                     options=[{'label': 'January', 'value': 'January'},
@@ -357,15 +362,15 @@ tab2_layout=html.Div([
                     {'label': 'April', 'value': 'April'},
                     {'label': 'May', 'value': 'May'},
                     {'label': 'June', 'value': 'June'}],
-                    value='January',labelStyle={'display': 'inline-block'}),
+                    value='January',labelStyle={'display': 'inline-block'},style={"text-align":"center"} ),
             dcc.Graph( id="availabilities-graph-app")
-            ],className='six columns')
+            ],className='six columns',style={"background-color":"white","margin":"10px"})
             
-    ], className='row'),
+    ], className='row',style={"background-color":"#e6e9ef", "padding-bottom":"30px"}),
 
 
     html.Div([
-        html.H3('MTTRs for Critical and High Incidences'),
+        html.H3('MTTR for Critical and High Incidences', style={"text-align":"center", "padding":"30px"}),
         dcc.RadioItems(
             id='MTTRsAll',
             options=[{'label': 'January', 'value': 'January'},
@@ -374,12 +379,12 @@ tab2_layout=html.Div([
             {'label': 'April', 'value': 'April'},
             {'label': 'May', 'value': 'May'},
             {'label': 'June', 'value': 'June'}],
-            value='January',labelStyle={'display': 'inline-block'}),
+            value='January',labelStyle={'display': 'inline-block'},style={"text-align":"center"} ),
         dcc.Graph( id="MTTRsAll-graph-app")
-        ],className='row'),
+        ],className='row',style={"background-color":"white", "padding-bottom":"30px"}),
 
     html.Div([
-        html.H3('Critical and High Incidence Volumes'),
+        html.H3('Critical and High Incidence Volumes', style={"text-align":"center", "padding":"30px"}),
         dcc.RadioItems(
             id='VolumesAppAll',
             options=[{'label': 'January', 'value': 'January'},
@@ -388,12 +393,12 @@ tab2_layout=html.Div([
             {'label': 'April', 'value': 'April'},
             {'label': 'May', 'value': 'May'},
             {'label': 'June', 'value': 'June'}],
-            value='January',labelStyle={'display': 'inline-block'}),
+            value='January',labelStyle={'display': 'inline-block'}, style={"text-align":"center"} ),
         dcc.Graph( id="VolumesAppAll-graph-app")
-        ],className='row')
+        ],className='row',style={"background-color":"white"})
 
 
-            ], style={"border-radius":"gray 3px"})
+            ], )
    
 
 
@@ -402,7 +407,7 @@ tab3_layout=html.Div([
     html.Div([
 
         html.Div([
-                html.H3('Service Reliability for Critical Incidences'),
+                html.H3('Service Reliability for Critical Incidences', style={"text-align":"center", "padding":"30px"}),
                 dcc.Dropdown(
                     id="reliability",
                 options=[
@@ -420,10 +425,10 @@ tab3_layout=html.Div([
                 ],value='.COM'
             ), 
             dcc.Graph( id="reliability-graph")
-            ],className='six columns'),
+            ],className='six columns',style={"background-color":"white","margin":"10px"}),
 
             html.Div([
-                html.H3('Service Availability for Critical Incidences'),
+                html.H3('Service Availability for Critical Incidences', style={"text-align":"center", "padding":"30px"}),
                 dcc.Dropdown(
                     id="availability",
                 options=[
@@ -441,13 +446,13 @@ tab3_layout=html.Div([
                 ],value='.COM'
             ), 
             dcc.Graph( id="availability-graph")
-            ],className='six columns')
+            ],className='six columns',style={"background-color":"white","margin":"10px"})
 
-    ], className ='row'),
+    ], className ='row',style={"background-color":"#e6e9ef"}),
     
     html.Div([
         html.Div([
-            html.H3('All Services - Reliability'),
+            html.H3('All Services - Reliability', style={"text-align":"center", "padding":"30px"}),
             dcc.RadioItems(
                     id="AllReliability",
                 options=[
@@ -457,14 +462,14 @@ tab3_layout=html.Div([
                     {'label': 'April', 'value': 'April'},
                     {'label': 'May', 'value': 'May'},
                     {'label': 'June', 'value': 'June'},
-                ], value='January', labelStyle={'display': 'inline-block'})
+                ], value='January', labelStyle={'display': 'inline-block'}, style={"text-align":"center"} )
         ]),
         dcc.Graph( id="allreliabilities")
-    ], className='row'),
+    ], className='row',style={"background-color":"#e6e9ef"}),
 
     html.Div([
         html.Div([
-            html.H3('All Services - Availability'),
+            html.H3('All Services - Availability', style={"text-align":"center", "padding":"30px"}),
             dcc.RadioItems(
                     id="AllAvailability",
                 options=[
@@ -474,14 +479,14 @@ tab3_layout=html.Div([
                     {'label': 'April', 'value': 'April'},
                     {'label': 'May', 'value': 'May'},
                     {'label': 'June', 'value': 'June'},
-                ], value='January',labelStyle={'display': 'inline-block'})
+                ], value='January',labelStyle={'display': 'inline-block'},style={"text-align":"center"} )
         ]),
         dcc.Graph( id="allavailabilities")
-    ], className='row'),
+    ], className='row',style={"background-color":"#e6e9ef"}),
 
     html.Div([
         html.Div([
-            html.H3('Number of Critical and High Incidences'),
+            html.H3('Number of Critical and High Incidences',style={"text-align":"center", "padding":"30px"}),
             dcc.RadioItems(
                     id="NumberHIGH",
                 options=[
@@ -491,10 +496,10 @@ tab3_layout=html.Div([
                     {'label': 'April', 'value': 'April'},
                     {'label': 'May', 'value': 'May'},
                     {'label': 'June', 'value': 'June'},
-                ], value='January',labelStyle={'display': 'inline-block'})
+                ], value='January',labelStyle={'display': 'inline-block'},style={"text-align":"center"} )
         ]),
         dcc.Graph( id="numberHIGH")
-    ], className='row'),
+    ], className='row',style={"background-color":"#e6e9ef"}),
 
     
     html.Div([
@@ -516,7 +521,7 @@ tab3_layout=html.Div([
                   # dcc.Graph(id='graph-gapminder'),
                 #],className="container") 
                 ])
-    ], className='row')
+    ], className='row',style={"background-color":"#e6e9ef"})
 
 #], style={"background-color":"gray"})
 ])
@@ -659,7 +664,10 @@ def Incidence_MTTRs(value):
                 
             ],
             'layout': {
-                'title': "Resolution Rates for {} in 2018".format(value)
+                'title': "Resolution Rates for {} in 2018".format(value),
+                'yaxis':{
+                     'title':'Hours'
+                }
             }
         }
     )
@@ -704,7 +712,7 @@ def find_numbers_of_CH_Tower(value):
                 {'x': AppsinMonthA, 'y': HighIncidences, 'type': 'bar', 'name': "High"}
             ],
             'layout': {
-                'title': "Incidence Volumes per Tower",
+                'title': "Towers' Incidence Volumes for {}".format(value),
                 #'xaxis': {'tickangle':"-90"}
             }
         })
@@ -738,7 +746,8 @@ def update_graph_Reliability(value):
                 {'x': monthsofApp, 'y': ReliabilitiesAPP, 'type': 'bar', 'name': value , 'marker':{'color': 'orange'}},
             ],
             'layout': {
-                'title': "Reliability for {} in 2018".format(value)
+                'title': "Reliability for {} in 2018".format(value),
+                'yaxis':{'title':"Hours"}
             }
         }
     )
@@ -767,7 +776,9 @@ def update_graph_Availability(value):
                 {'x': months, 'y': AvailabilitiesApp, 'type': 'scatter', 'name': value},
             ],
             'layout': {
-                'title': "Availability for {} in 2018".format(value)
+                'title': "Availability for {} in 2018".format(value),
+                'yaxis':{'title':"%"}
+
             }
         }
     )
@@ -801,7 +812,8 @@ def update_graph_Reliabilities_App(value):
                 {'x': AppsinMonth, 'y': ReliabilitiesforApps, 'type': 'bar', 'name': value , 'marker':{'color': 'orange'}},
             ],
             'layout': {
-                'title': "Reliabilities for {}".format(value)
+                'title': "Reliabilities for {}".format(value),
+                'yaxis':{'title':"Hours"}
             }
         }
     )
@@ -832,7 +844,9 @@ def update_graph_Availabilities_App(value):
                     {'x': AppsinMonth, 'y': AvailabilitiesforApps, 'type': 'scatter', 'name': value },
                 ],
                 'layout': {
-                    'title': "Reliabilities for {}".format(value)
+                    'title': "Availabilities for {}".format(value),
+                    'yaxis':{'title':"%"}
+                    
                 }
             }
         )
@@ -892,7 +906,8 @@ def update_MTTR(value):
                 {'x': AppsMonths, 'y': MTTRlow, 'type': 'bar', 'name': "low", 'marker':{'color': 'green'}}
             ],
             'layout': {
-                'title': "MTTRs for {} in 2018".format(value)
+                'title': "MTTR for {} in 2018".format(value),
+                'yaxis':{'title':"Hours"}
             }
         }
     )
@@ -1034,8 +1049,9 @@ def find_MTTRs(value):
                 {'x': AppsinMonthA, 'y': HighIncidences, 'type': 'bar', 'name': "High"}
             ],
             'layout': {
-                'title': "MTTRs for ".format(value),
-                'xaxis': {'tickangle':"-90"}
+                'title': "MTTR for {} in 2018".format(value),
+                'xaxis': {'tickangle':"-90"},
+                'yaxis':{'title':"Hours"}
             }
         })
 
@@ -1075,7 +1091,8 @@ def update_graph_Reliability_new(value):
                 {'x': months, 'y': Reliabilities, 'type': 'bar', 'name': value , 'marker':{'color': 'orange'}},
             ],
             'layout': {
-                'title': "Reliability for {} in 2018".format(value)
+                'title': "Reliability for {} in 2018".format(value),
+                'yaxis':{'title':"Hours"}
             }
         }
     )
@@ -1083,7 +1100,7 @@ def update_graph_Reliability_new(value):
 @app.callback(
    Output(component_id='availability-graph', component_property='figure'),
    [Input(component_id='availability', component_property='value')])
-def update_graph_Availability(value):
+def update_graph_Availability_New(value):
     ServiceDF=NEW[NEW['Service']==value]
     array = ['Critical', 'High']
     ServicesinMonthcritical=ServiceDF.loc[ServiceDF['Priority'].isin(array)]
@@ -1102,7 +1119,8 @@ def update_graph_Availability(value):
                 {'x': months, 'y': Availabilities, 'type': 'scatter', 'name': value},
             ],
             'layout': {
-                'title': "Availability for {} in 2018".format(value)
+                'title': "Availability for {} in 2018".format(value),
+                'yaxis':{'title':"%"}
             }
         }
     )
@@ -1137,7 +1155,8 @@ def update_graph_Reliabilities(value):
                 {'x': ServicesinMonth, 'y': ReliabilitiesforServices, 'type': 'bar', 'name': value , 'marker':{'color': 'orange'}},
             ],
             'layout': {
-                'title': "Reliabilities for {}".format(value)
+                'title': "Reliabilities for {}".format(value),
+                'yaxis':{'title':"Hours"}
             }
         }
     )
@@ -1163,10 +1182,11 @@ def update_graph_Availabilities(value):
     ServicesinMonthA = [x for _,x in sorted(zip(AvailabilitiesforServices,ServicesinMonthA))]
           
     return ({'data': [
-                {'x': ServicesinMonthA, 'y': AvailabilitiesforServices, 'type': 'bar', 'name': value},
+                {'x': ServicesinMonthA, 'y': AvailabilitiesforServices, 'type': 'scatter', 'name': value},
             ],
             'layout': {
-                'title': "Availabilities for {}".format(value)
+                'title': "Availabilities for {}".format(value),
+                'yaxis':{'title':"%"}
             }
         }
     )
