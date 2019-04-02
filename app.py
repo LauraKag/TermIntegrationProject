@@ -692,9 +692,11 @@ def find_numbers_of_CH_Tower(value):
     AppsinMonthcritical=Monthsdf.loc[Monthsdf['Priority'].isin(array)]
     AppsinMonthA=AppsinMonthcritical['Tower Group'].unique()
     AppsinMonthA=[x for x in AppsinMonthA if str(x) != 'nan']
+    AppsinMonthA=[x for x in AppsinMonthA if str(x) != 'UNKNOW']
     AppsinMonthCriticalonly=Monthsdf[Monthsdf['Priority']=='Critical']
     AppsinMonthACritical=AppsinMonthCriticalonly['Tower Group'].unique()
     AppsinMonthACritical=[x for x in AppsinMonthACritical if str(x) != 'nan']
+    AppsinMonthACritical=[x for x in AppsinMonthACritical if str(x) != 'UNKNOW']
     CriticalIncidences=[] 
     HighIncidences=[]
     for i in AppsinMonthA:
