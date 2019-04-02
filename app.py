@@ -60,8 +60,8 @@ app.layout = html.Div([
 
      html.Div([
             html.Div(
-                html.Img(src='http://www.aviacionnews.com/blog/wp-content/uploads/2015/08/IAG-Logo.png')
-                ,style={"float":"top-left","height":"60%"})
+                html.Img(src='img/Capture.jng' style={"height":"100px", "width":"auto","float":"top-left"})
+                ,style={"float":"top-left","height":"200px"})
             ]
             ),
     html.Div([ 
