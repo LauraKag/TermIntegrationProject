@@ -60,8 +60,8 @@ app.layout = html.Div([
 
      html.Div([
             html.Div(
-                html.Img(src='https://noticiasbancarias.com/wp-content/uploads/2012/08/IAG.png',style={"float":"top-left", "height":"100px", "width": "auto"})
-                ,style={"float":"top-left","height":"200px"})
+                html.Img(src='https://noticiasbancarias.com/wp-content/uploads/2012/08/IAG.png',style={"float":"top-left", "height":"180px", "width": "auto"})
+                ,style={"float":"top-left","height":"200px","background-color":"#e6e9ef"})
             ]
             ),
     html.Div([ 
