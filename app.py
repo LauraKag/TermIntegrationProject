@@ -70,7 +70,7 @@ app.layout = html.Div([
 
      html.Div([
             html.Div(
-                html.Img(src='https://noticiasbancarias.com/wp-content/uploads/2012/08/IAG.png',style={"float":"top-left", "height":"180px", "width": "auto"}),
+                html.Img(src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Logo_iberia_2013.png/800px-Logo_iberia_2013.png',style={"float":"top-left", "height":"180px", "width": "auto"}),
                 #html.Img(src='https://cdn3.iconfinder.com/data/icons/rounded-monosign/142/logout-512.png', style={"float":"top-right", "height":"100px", "width": "auto"}),
                 style={"float":"top-left","height":"200px","background-color":"#97a9c9"}
                 )
